@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule</title>
+    <script src="/js/jquery-2.1.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            overflow-x: auto;
+            margin: 0;
+        }
+
+        .modal {
+            position: fixed;
+        }
+
+        .modal-dialog {
+            margin: 1rem auto; /* Center modal */
+        }
+
+        .modal-backdrop {
+            position: fixed;
+        }
+
+        .modal-content {
+            max-height: 90vh; /* Adjust as needed */
+            overflow-y: auto;
+        }
+
+        @media screen and (max-width: 768px) {
+            .modal-dialog {
+                position: fixed;
+                
+            }
+        }
+
+        .schedule {
+            display: flex;
+            justify-content: space-between;
+        }
+    
+        .day-column {
+            flex: 1;
+            padding: 10px;
+            margin: 0px 5px;
+            border-radius: 5px;
+            color: #c5ccd8;
+            min-width: 250px;
+        }
+    
+        .day-column h4 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #c5ccd8;
+        }
+    
+        .task-card {
+            background-color: #393c41;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 3px;
+            border-left: 5px solid green;
+        }
+
+        .task-card:hover {
+            cursor: pointer;
+        }
+    
+        .add-task {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+        }
+    
+        .add-task input[type="text"] {
+            flex: 1;
+            padding: 5px;
+            border: none;
+            border-radius: 3px;
+            background-color: #393c41;
+            color: #c5ccd8;
+        }
+    
+        .modal-dialog > * {
+            background-color: #393c41;
+        }
+    
+        .color-picker {
+            margin-bottom: 20px;
+            width: 100px;
+            height: 30px;
+            display: block;
+        }
+    
+        .color-code {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #292b2f;
+            width: 90px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 5px;
+        }
+    
+        .color-code:hover {
+            cursor: pointer;
+        }
+    
+        /* Additional styles for the form */
+        #item-form, #update-item-form {
+            background-color: #393c41;
+            padding: 20px;
+            border-radius: 5px;
+            color: white;
+        }
+    
+        #item-form label, #update-item-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+    
+        #item-form input[type="text"],
+        #item-form textarea,
+        #item-form select,
+        #update-item-form input[type="text"],
+        #update-item-form textarea,
+        #update-item-form select {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            background-color: #292b2f;
+            color: white;
+            margin-bottom: 10px;
+            border-radius: 3px;
+        }
+    
+        #item-form input[type="date"],
+        #item-form input[type="checkbox"],
+        #update-item-form input[type="date"],
+        #update-item-form input[type="checkbox"] {
+            display: inline-block;
+            margin-right: 5px;
+        }
+    
+        #item-form button[type="submit"],
+        #update-item-form button[type="submit"] {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .delete-button {
+            background-color: rgb(97, 42, 42);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+        }
+
+        .delete-button:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
