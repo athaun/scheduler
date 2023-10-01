@@ -1,4 +1,5 @@
 <%- include('partials/head')%>
+<div id="scheduleContainer">
 <br>
 
 <div class="schedule">
@@ -85,6 +86,8 @@
     <% } %>
 </div>
 
+</div>
+
 <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -140,11 +143,41 @@
         <div class="modal-content">
             <div class="modal-body">
                 <form id="update-item-form">
-                    <h4 id="affiliation">sdsdf</h4>
-
                     <input type="text" id="updateTitle" name="title" placeholder="Title" required>
+
+                    <textarea id="updateDescription" name="description" placeholder="Description" ></textarea>
+
+                    <br><br>
+
+                    <label for="persistentCheckbox">
+                        <input type="checkbox" id="persistentCheckbox" name="persistent"> Persistent
+                    </label>
                     
-                    <textarea id="updateDescription" name="description" placeholder="Description"></textarea>
+                    <div class="color-picker">
+                    <label for="colorPicker">Color</label>
+                        <input type="color" id="colorPicker">
+                        <!-- <div class="color-code">#000000</div> -->
+                    </div>                        
+
+                    <label for="affiliation" id="affiliationLabel" style="display:none;">Affiliation</label>
+                    <select id="affiliation" name="affiliation" style="display:none;">
+                        <% for (let i = 0; i < persistent.length; i++) { %>
+                            <option value="<%= persistent[i].title %>"><%= persistent[i].title %></option>
+                        <% } %>
+                    </select>
+
+                    <br>
+
+                    <label for="daysSelected">Days</label>
+                    <select id="daysSelected" name="daysSelected" multiple>
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                        <option value="Sunday">Sunday</option>
+                    </select>
 
                     <br>
                 </form>
@@ -158,9 +191,8 @@
     </div>
 </div>
 
+
 <button id="deleteAllTasks" class="delete-button">Delete All Tasks</button>
-
-
 
 <script>
 
